@@ -1,0 +1,23 @@
+.or {
+  display: inline-block;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+}
+
+/*! Setup Default Sizes */
+.or-16 { width: 16px; height: 16px; }
+.or-20 { width: 20px; height: 20px; }
+.or-32 { width: 32px; height: 32px; }
+.or-64 { width: 64px; height: 64px; }
+.or-128 { width: 128px; height: 128px; }
+.or-256 { width: 256px; height: 256px; }
+
+.or-n { background: url(icons/N.svg); }
+.or-na { background: url(icons/NA.svg); }
+.or-a { background: url(icons/A.svg); }
+.or-sa { background: url(icons/SA.svg); }
+.or-s { background: url(icons/S.svg); }
+.or-sv { background: url(icons/SV.svg); }
+.or-v { background: url(icons/V.svg); }
+.or-nv { background: url(icons/NV.svg); }
