@@ -2,10 +2,11 @@
  * Created by Admin on 31-May-19.
  */
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import Header from '../screens/Header';
 import faspaService from '../service/Faspa';
 import { Card } from 'react-native-elements/src/index.d';
+import Frettir from '../screens/Frettir';
 
 
 
@@ -30,54 +31,64 @@ export default class Vinsaelir extends Component {
     }
 
     render() {
+        
+        
         console.log(this.state.dataSource);
         return (
-            <View>
+
+            <ScrollView>
+                <Header/>
+
                 <FlatList
                 data={this.state.dataSource}
                 renderItem={({item: rowData, index}) => <View >{this.displayRow(rowData, index)}</View>}
                 />
-            </View>
+                <Frettir/>
+            </ScrollView>
         )
     }
     displayRow(rowData, index) {
         if (index % 2 === 0) {
             return (
-                <TouchableOpacity>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
+                <TouchableOpacity onPress={() => this._onPressCity(rowData.stodid)}>
+                    <View style={styles.containerCss}>
+                        <View style={{width: '30%'}}>
                         <Text style={styles.textcss}>{rowData.nafn}</Text>
-                        {/*<Image
-                            source={require('./assets/css/wu/icons/black/png/256x256' + rowData.merki + '.png')}
-                        />*/}
-                        <Text style={styles.textcss}>{rowData.merki}</Text>
+                        </View>
 
+                        <View style={{width: '20%'}}>
+                       {/* <Text style={styles.textcss}>{rowData.merki}</Text>*/}
+                             <Image style={{height: 20, width: 20}}
+                             source={{uri:'../256x256/' + rowData.merki + '.png'}}
+                             />
+                        </View>
+
+                        <View style={{width: '20%'}}>
                         <Text style={styles.textcss}>{(rowData.t2).toFixed(0) + '°'}</Text>
+                        </View>
 
+                        <View style={{width: '20%'}}>
                         <Text style={styles.textcss}>{this.state.dataSource[index+1].merki}</Text>
+                        </View>
 
+                        <View style={{width: '20%'}}>
                         <Text style={styles.textcss}>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text>
+                        </View>
                     </View>
                 </TouchableOpacity>
             )
         }
-        /*else {
-            return (
-                <TouchableOpacity>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
-                        <Text>{rowData.merki}</Text>
-                        <Text>{(rowData.t2).toFixed(0) + '°'}</Text>
-                    </View>
-                </TouchableOpacity>
-            )
-        }*/
+    }
+    _onPressCity(id) {
+        this.props.navigation.navigate('Top',{itemId: id});
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
+    containerCss: {
         flex: 1,
         flexDirection: 'row',
-        padding: 10,
+        padding: 15,
         borderBottomColor: '#e6e6e1',
         borderBottomWidth: 1,
         marginRight: 10,

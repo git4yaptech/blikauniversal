@@ -18,7 +18,15 @@ var faspaService = {
     },
     getFrett: function(slug) {
         return fetch(baseurl + 'FaFrett/' + slug).then((response) => response.json());
+    },
+    getForecast12 : function(id) {
+        return fetch(baseurl + 'GetBlikaForecast12klst/' + id).then((response) => response.json());
+    },
+    getForecastDay : function(id, ar, man, dagur) {
+        console.log(baseurl + 'GetBlikaForecastDag/' + id + '/' + ar + '/' + man + '/' + dagur);
+        return fetch(baseurl + 'GetBlikaForecastDag/' + id + '/' + ar + '/' + man + '/' + dagur).then((response) => response.json());
     }
+
 };
 
 export default faspaService;
