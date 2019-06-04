@@ -4,12 +4,13 @@
 import WEATHER_ICONS from '../service/constants';
 
 var IconService = {
-    getIconName : function(name) {
-         return String.fromCharCode(WEATHER_ICONS.day[name]);
-    },
 
     getWindName : function(name) {
-        return String.fromCharCode(WEATHER_ICONS.wind[name]);
+        return WEATHER_ICONS.wind[name];
+    },
+
+    getWeatherIcon: function (name) {
+        return WEATHER_ICONS.day[name];
     },
 };
 

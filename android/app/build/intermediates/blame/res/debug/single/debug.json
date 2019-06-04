@@ -1124,6 +1124,10 @@
         "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\4cce8e39ab04256e0b8dd63414eb6e28\\res\\drawable\\abc_list_divider_material.xml"
     },
     {
+        "merged": "D:\\demos\\Aarti\\reactNativeApps\\rn_blikauniversal\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_file_provider_paths.xml.flat",
+        "source": "D:\\demos\\Aarti\\reactNativeApps\\rn_blikauniversal\\node_modules\\react-native-webview\\android\\build\\intermediates\\packaged_res\\debug\\xml\\file_provider_paths.xml"
+    },
+    {
         "merged": "D:\\demos\\Aarti\\reactNativeApps\\rn_blikauniversal\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_dev_loading_view.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.59.8.aar\\ed94eddcb6caf68e80d4d42e5f85b940\\res\\layout\\dev_loading_view.xml"
     },

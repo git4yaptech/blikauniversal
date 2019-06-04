@@ -2,8 +2,10 @@
  * Created by Admin on 03-Jun-19.
  */
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, StyleSheet,Image } from 'react-native';
 import faspaService from '../service/Faspa';
+import IconService from '../service/IconService';
+import { Styles } from './globalStyle';
 import Moment from 'moment';
 
 export default class Dagsspa extends Component {
@@ -54,24 +56,26 @@ export default class Dagsspa extends Component {
 
     }
     displayRow(rowData, index) {
+        let imageIcon = IconService.getWeatherIcon(rowData.merki);
             return (
                     <View style={styles.containerCss}>
                         <View style={{width: '15%'}}>
                             <Text style={styles.textcss}>{Moment(rowData.dags_spar).format('HH')}</Text>
                         </View>
                         <View style={{width: '20%'}}>
-                            <Text style={styles.textcss}>{rowData.merki}</Text>
+                            <Image style={{height: 30, width: 30}}
+                                   source={imageIcon}/>
                         </View>
 
                         <View style={{width: '15%'}}>
                             <Text style={styles.textcss}>{(rowData.t2).toFixed(0) + '°'}</Text>
                         </View>
 
-                        <View style={{width: '20%'}}>
-                            <Text style={styles.textcss}>{(rowData.r).toFixed(1.0-1) + 'mm'}</Text>
+                        <View style={{width: '30%'}}>
+                            <Text style={styles.textcss}>{(rowData.r).toFixed(1.0-1) + ' mm'}</Text>
                         </View>
-                        <View style={{width: '20%'}}>
-                            <Text style={styles.textcss}>{rowData.dtexti}</Text>
+                        <View style={{width: '10%'}}>
+                            <Text style={Styles.windIcon}>{IconService.getWindName(rowData.dtexti)}</Text>
                         </View>
 
                         <View style={{width: '15%'}}>

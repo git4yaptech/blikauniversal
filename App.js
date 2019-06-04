@@ -21,21 +21,21 @@ import Dagsspa from './screens/Dagsspa';
 
 const RootStack = createStackNavigator({
 
-  /*
-    Head: {
-        screen: Header,
-    },
-   Frett: {
-       screen : Frett,
-   },*/
     Vilsaelir: {
         screen : Vinsaelir,
     },
-   Top: {
-       screen :Topforecast,
-   },
+    Head: {
+        screen: Header,
+    },
+    Top: {
+        screen :Topforecast,
+    },
+
     Dags : {
         screen : Dagsspa,
+    },
+    Frett: {
+        screen : Frett,
     },
     Frettir: {
         screen : Frettir,

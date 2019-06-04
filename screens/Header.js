@@ -49,8 +49,10 @@ export default class Header extends Component {
                         onChangeText={text => this.autoCompleteData(text)}
 
                         renderItem={({item, i}) => (
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => this._onPressCity(item[1])}>
+                                <View style={styles.containerCss}>
                                 <Text>{item[0]}</Text>
+                                </View>
                             </TouchableOpacity>
                         )}
                     />
@@ -58,6 +60,10 @@ export default class Header extends Component {
                 </View>
             </View>
         )
+    }
+
+    _onPressCity(id) {
+        this.props.navigation.navigate('Top',{itemId: id});
     }
 }
 const styles = StyleSheet.create({
@@ -67,5 +73,18 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         zIndex: 1,
-    }
+    },
+    containerCss: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 15,
+        borderBottomColor: '#e6e6e1',
+        borderBottomWidth: 1,
+        marginRight: 10,
+        marginLeft: 10,
+    },
+    textcss: {
+        paddingLeft: 10,
+        paddingRight: 10
+    },
 });

@@ -3,11 +3,11 @@
  */
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, FlatList, TouchableOpacity ,Image} from 'react-native';
-import { Card } from 'react-native-elements';
+import { Card, Icon } from 'react-native-elements';
 import faspaService from '../service/Faspa';
 import IconService from '../service/IconService';
+import { Styles } from './globalStyle';
 import Moment from 'moment';
-
 
 export default class Topforecast extends Component {
     constructor(props) {
@@ -55,8 +55,8 @@ export default class Topforecast extends Component {
 
     displayRow(rowData, index){
         var hours = Moment(rowData.dags_spar).format('HH');
-      /*  var v1 = Moment(rowData[index+1].dags_spar.format('HH'));*/
         if(hours != '12') {
+            let imageIcon = IconService.getWeatherIcon(rowData.merki);
             return (
                 <TouchableOpacity onPress={() => this._onPress(rowData)}>
                     <Card title={Moment(rowData.dags_spar).format('dddd D.MMM')}>
@@ -66,16 +66,33 @@ export default class Topforecast extends Component {
                                 {hours >= '12' ? <Text>{hours + '-00'}</Text> : null}
                             </View>
                             <View style={{width: '20%'}}>
-                                <Text>{rowData.merki}</Text>
-                                {/*<Text>{this.getWindIcon(rowData.merki)}</Text>*/}
+                                <Image style={{height: 30, width: 30}}
+                                       source={imageIcon}/>
                             </View>
                             <View style={{width: '10%'}}><Text>{(rowData.t2).toFixed(0) + '°'}</Text></View>
                             <View style={{width: '20%'}}><Text>{(rowData.r).toFixed(0) + 'mm' } </Text></View>
-                            <View style={{width: '20%'}}><Text>{rowData.dtexti}</Text></View>
-                            {/*<View style={{width: '20%'}}>
-                               <Text>{this.getWindIcon(rowData.dtexti)}</Text>*/}
-                            <View style={{width: '10%'}}><Text>{(rowData.f10).toFixed(0) }</Text></View>
+                            <View style={{width: '20%'}}>
+                                <Text style={Styles.windIcon}>{IconService.getWindName(rowData.dtexti)}</Text>
                             </View>
+                            <View style={{width: '10%'}}><Text>{(rowData.f10).toFixed(0) }</Text></View>
+                        </View>
+                        {this.state.dataSource.length != index+1 &&  Moment(this.state.dataSource[index+1].dags_spar).format('HH') != '00' ?
+                            <View style={{flex: 1, flexDirection: 'row'}}>
+                                <View style={{width: '20%'}}>
+                                    {Moment(this.state.dataSource[index+1].dags_spar).format('HH') < '12' ? <Text>{Moment(this.state.dataSource[index+1].dags_spar).format('HH') + '-12'}</Text> : null}
+                                    {Moment(this.state.dataSource[index+1].dags_spar).format('HH') >= '12' ? <Text>{Moment(this.state.dataSource[index+1].dags_spar).format('HH') + '-00'}</Text> : null}
+                                </View>
+                                <View style={{width: '20%'}}>
+                                 {/*   <Text>{this.state.dataSource[index+1].merki}</Text>*/}
+                                    <Image style={{height: 30, width: 30}}
+                                           source={IconService.getWeatherIcon(this.state.dataSource[index+1].merki)}/>
+                                </View>
+                                <View style={{width: '10%'}}><Text>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text></View>
+                                <View style={{width: '20%'}}><Text>{(this.state.dataSource[index+1].r).toFixed(0) + ' mm' } </Text></View>
+                                <View style={{width: '20%'}}><Text style={Styles.windIcon}>{IconService.getWindName(this.state.dataSource[index+1].dtexti)}</Text></View>
+                                <View style={{width: '10%'}}><Text>{(this.state.dataSource[index+1].f10).toFixed(0) }</Text></View>
+                            </View>
+                             : null}
                     </Card>
                 </TouchableOpacity>
 
@@ -87,11 +104,5 @@ export default class Topforecast extends Component {
             const param2 = Moment(rowData.dags_spar).format('MM');
             const param3 = Moment(rowData.dags_spar).format('DD');
             this.props.navigation.navigate('Dags',{itemId: rowData.stodid,ar:param1,man:param2,dagur:param3});
-    }
-    getWindIcon(dtexti){
-            return IconService.getWindName(dtexti);
-    }
-    getWindIcon(merki){
-        return IconService.getWindName(merki);
     }
 }
