@@ -2,7 +2,8 @@
  * Created by Admin on 01-Jun-19.
  */
 import React, { Component } from 'react';
-import { View, Text, Image} from 'react-native';
+import { View, Text, Image, ActivityIndicator, ScrollView } from 'react-native';
+import { WebView } from 'react-native-webview';
 import faspaService from '../service/Faspa';
 import Moment from 'moment';
 
@@ -11,7 +12,9 @@ export default class Frett extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource : {},
+            dataSource: {},
+            isLoading: true,
+
         }
     }
 
@@ -21,6 +24,7 @@ export default class Frett extends Component {
         faspaService.getFrett(slug)
             .then((data) => {
                 this.setState({
+                    isLoading: false,
                     dataSource: data
                 }, function () {
                 });
@@ -30,20 +34,27 @@ export default class Frett extends Component {
     }
 
     render() {
-        /* setTimeout(function () {
-        this.state.details = this.state.dataSource;
-        },1000);
-        console.log(details);*/
-        return (
+        if (this.state.isLoading) {
+            return (
 
-                <View>
-                    <Text>News Details Page</Text>
-                    {/* <Text>{ this.state.details[0].hofundur}</Text>
-                     <Text>{Moment( this.state.details[0].dags_spar).format('dd.MM.YYYY HH:mm')}</Text>
-                     <Text>{ this.state.details[0].titill}</Text>*/}
+                <View style={{flex: 1, padding: 20}}>
+                    <ActivityIndicator/>
                 </View>
-
-
+            )
+        }
+        var rowData = this.state.dataSource[0];
+        var imageData = 'http://api.blika.is/media/' + rowData['mynd'];
+        var news = rowData.efni.replace(/<img[^>]*>/g, '');
+        return (
+            <ScrollView>
+            <View>
+                <Text>{rowData.hofundur} | {Moment(rowData.dags_spar).format('dd.MM.YYYY HH:mm')}</Text>
+                <Text>{rowData.titill}</Text>
+                <Image style={{height: 200, width: '100%', paddingHorizontal: 5}}
+                       source={{uri: imageData}}/>
+                <WebView source={{html:news}} style={{height: 200, width: '100%', paddingHorizontal: 5,fontSize:20}}/>
+            </View>
+            </ScrollView>
         )
     }
 }

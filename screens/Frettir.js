@@ -5,8 +5,6 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, ScrollView} from 'react-native';
 import { Card } from 'react-native-elements';
 import faspaService from '../service/Faspa';
-import Header from '../screens/Header';
-import Vinsaelir from '../screens/Vinsaelir';
 import { WebView } from 'react-native-webview';
 
 export default class Frettir extends Component {
@@ -44,15 +42,13 @@ export default class Frettir extends Component {
         return (
             <TouchableOpacity onPress={() => this._onPress(rowData.url)}>
             <Card title={rowData.titill}>
-                <Image style={{height: 200, width: '100%'}} source={{uri:imageSrc }}/>
-               {/* <WebView style={{height: 60, width: '100%'}}  source={{uri:rowData.efni}} />*/}
-                <WebView source={{ uri: rowData.efni}}
-                         style={{height: 80, width: '100%'}}
-                />
-                <Text>Read more...</Text>
+                <Image style={{height: 150, width: '100%'}} source={{uri:imageSrc }}/>
+               <Text>Read More...</Text>
+             {/*  <WebView source={{uri: rowData.efni}} style={{height: 150, width: '100%'}} />*/}
             </Card>
             </TouchableOpacity>
-        )}
+        )
+    }
     _onPress = (url) => {
         this.props.navigation.navigate('Frett', {url});
     }

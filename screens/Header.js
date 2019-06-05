@@ -21,19 +21,17 @@ export default class Header extends Component {
     }
 
     autoCompleteData(text) {
-        this.setState({query: text});
-        let capitalWork: string = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-        console.log(capitalWork);
-        faspaService.getStadir(capitalWork)
-            .then((data) => {
-                console.log('data', text, data);
-                this.setState({
-                    dataSource: data
-                }, function () {
-                });
-            }).catch((error) => {
-            console.log(error);
-        })
+            this.setState({query: text});
+            let capitalWork: string = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+            faspaService.getStadir(capitalWork)
+                .then((data) => {
+                    this.setState({
+                        dataSource: data
+                    }, function () {
+                    });
+                }).catch((error) => {
+                console.log(error);
+            })
     }
 
     render() {
@@ -49,14 +47,15 @@ export default class Header extends Component {
                         onChangeText={text => this.autoCompleteData(text)}
 
                         renderItem={({item, i}) => (
+                            <View>
                             <TouchableOpacity onPress={() => this._onPressCity(item[1])}>
                                 <View style={styles.containerCss}>
                                 <Text>{item[0]}</Text>
                                 </View>
                             </TouchableOpacity>
+                            </View>
                         )}
                     />
-
                 </View>
             </View>
         )
