@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { WebView } from 'react-native-webview';
+import Header from '../screens/Header';
 import faspaService from '../service/Faspa';
 import Moment from 'moment';
 
@@ -48,11 +49,14 @@ export default class Frett extends Component {
         return (
             <ScrollView>
             <View>
+                <Header navigation={this.props.navigation}/>
                 <Text>{rowData.hofundur} | {Moment(rowData.dags_spar).format('dd.MM.YYYY HH:mm')}</Text>
                 <Text>{rowData.titill}</Text>
                 <Image style={{height: 200, width: '100%', paddingHorizontal: 5}}
                        source={{uri: imageData}}/>
-                <WebView source={{html:news}} style={{height: 200, width: '100%', paddingHorizontal: 5,fontSize:20}}/>
+                <WebView source={{html:news}} style={{height: 1000, width: '100%', paddingHorizontal: 5}}
+                         scrollEnabled={true}
+                         scalesPageToFit={false}/>
             </View>
             </ScrollView>
         )

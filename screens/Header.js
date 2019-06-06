@@ -16,11 +16,11 @@ export default class Header extends Component {
             query: null
         }
     }
-
-    componentDidMount() {
-    }
-
     autoCompleteData(text) {
+        if(!text){
+            this.setState({dataSource:[],query:text});
+            return;
+        }
             this.setState({query: text});
             let capitalWork: string = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
             faspaService.getStadir(capitalWork)
@@ -45,11 +45,11 @@ export default class Header extends Component {
                         data={this.state.dataSource}
                         defaultValue={this.state.query}
                         onChangeText={text => this.autoCompleteData(text)}
-
+                        containerStyle={styles.autocompleteContainer}
                         renderItem={({item, i}) => (
-                            <View>
+                            <View style={styles.containerCss}>
                             <TouchableOpacity onPress={() => this._onPressCity(item[1])}>
-                                <View style={styles.containerCss}>
+                                <View>
                                 <Text>{item[0]}</Text>
                                 </View>
                             </TouchableOpacity>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         flex: 1,
         left: 0,
         right: 0,
-        top: 0,
+        top: 17,
         zIndex: 1,
     },
     containerCss: {
@@ -81,6 +81,15 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginRight: 10,
         marginLeft: 10,
+        width:'100%'
+    },
+    autocompleteContainer: {
+        flex: 1,
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        zIndex: 1
     },
     textcss: {
         paddingLeft: 10,

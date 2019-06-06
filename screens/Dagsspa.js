@@ -46,7 +46,9 @@ export default class Dagsspa extends Component {
         }
         return (
             <View>
+                <View>
                 <Text style={styles.heading}>{Moment(this.state.dataSource[0].dags_spar).format('dddd D.MMM')}</Text>
+                </View>
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({item: rowData, index}) => this.displayRow(rowData, index)}
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
         paddingRight: 10
     },
     heading : {
-        alignContent : 'center',
+        textAlign: 'center',
         fontSize: 20,
         fontWeight: 'bold',
     }

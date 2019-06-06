@@ -9,8 +9,6 @@ import faspaService from '../service/Faspa';
 import Frettir from '../screens/Frettir';
 import IconService from '../service/IconService';
 
-
-
 export default class Vinsaelir extends Component {
     constructor(props) {
         super(props)
@@ -35,6 +33,20 @@ export default class Vinsaelir extends Component {
         return (
             <ScrollView>
                 <Header navigation={this.props.navigation}/>
+                <View style={styles.HeadingContainer}>
+                    <View style={{width: '40%'}}>
+                    </View>
+
+                    <View style={{width: '30%'}}>
+                        <Text style={styles.textcss}>Í dag</Text>
+                    </View>
+
+                    <View style={{width: '30%'}}>
+                        <Text style={styles.textcss}>Á morgun</Text>
+                    </View>
+
+                </View>
+
                 <FlatList
                 data={this.state.dataSource}
                 renderItem={({item: rowData, index}) => <View >{this.displayRow(rowData, index)}</View>}
@@ -86,6 +98,13 @@ export default class Vinsaelir extends Component {
 }
 
 const styles = StyleSheet.create({
+    HeadingContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 15,
+        marginRight: 10,
+        marginLeft: 10
+    },
     containerCss: {
         flex: 1,
         flexDirection: 'row',

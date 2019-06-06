@@ -2,8 +2,9 @@
  * Created by Admin on 03-Jun-19.
  */
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, FlatList, TouchableOpacity ,Image} from 'react-native';
+import { View, Text, ActivityIndicator, FlatList, TouchableOpacity ,Image, ScrollView} from 'react-native';
 import { Card, Icon } from 'react-native-elements';
+import Header from '../screens/Header';
 import faspaService from '../service/Faspa';
 import IconService from '../service/IconService';
 import { Styles } from './globalStyle';
@@ -44,12 +45,13 @@ export default class Topforecast extends Component {
         }
 
         return (
-            <View>
+             <ScrollView>
+                <Header/>
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({item: rowData, index}) => this.displayRow(rowData, index)}
                 />
-            </View>
+             </ScrollView>
         )
     }
 
@@ -69,9 +71,9 @@ export default class Topforecast extends Component {
                                 <Image style={{height: 30, width: 30}}
                                        source={imageIcon}/>
                             </View>
-                            <View style={{width: '10%'}}><Text>{(rowData.t2).toFixed(0) + '°'}</Text></View>
-                            <View style={{width: '20%'}}><Text>{(rowData.r).toFixed(0) + 'mm' } </Text></View>
-                            <View style={{width: '20%'}}>
+                            <View style={{width: '20%'}}><Text>{(rowData.t2).toFixed(0) + '°'}</Text></View>
+                            <View style={{width: '20%'}}><Text>{(rowData.r).toFixed(0) + ' mm' } </Text></View>
+                            <View style={{width: '10%'}}>
                                 <Text style={Styles.windIcon}>{IconService.getWindName(rowData.dtexti)}</Text>
                             </View>
                             <View style={{width: '10%'}}><Text>{(rowData.f10).toFixed(0) }</Text></View>
@@ -87,9 +89,9 @@ export default class Topforecast extends Component {
                                     <Image style={{height: 30, width: 30}}
                                            source={IconService.getWeatherIcon(this.state.dataSource[index+1].merki)}/>
                                 </View>
-                                <View style={{width: '10%'}}><Text>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text></View>
+                                <View style={{width: '20%'}}><Text>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text></View>
                                 <View style={{width: '20%'}}><Text>{(this.state.dataSource[index+1].r).toFixed(0) + ' mm' } </Text></View>
-                                <View style={{width: '20%'}}><Text style={Styles.windIcon}>{IconService.getWindName(this.state.dataSource[index+1].dtexti)}</Text></View>
+                                <View style={{width: '10%'}}><Text style={Styles.windIcon}>{IconService.getWindName(this.state.dataSource[index+1].dtexti)}</Text></View>
                                 <View style={{width: '10%'}}><Text>{(this.state.dataSource[index+1].f10).toFixed(0) }</Text></View>
                             </View>
                              : null}
