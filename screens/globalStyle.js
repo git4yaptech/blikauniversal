@@ -9,5 +9,13 @@ export const Styles = StyleSheet.create({
     windIcon: {
         fontFamily: 'weathericons-regular-webfont',
         fontSize: 18
-    }
+    },
+    textcssHot: {
+
+        color: 'red',
+    },
+    textcssCold: {
+
+        color: 'blue',
+    },
 });

@@ -70,7 +70,7 @@ export default class Dagsspa extends Component {
                         </View>
 
                         <View style={{width: '15%'}}>
-                            <Text style={styles.textcss}>{(rowData.t2).toFixed(0) + '°'}</Text>
+                            <Text style={[(rowData.t2).toFixed(0) > 0 ? Styles.textcssHot : Styles.textcssCold]}>{(rowData.t2).toFixed(0) + '°'}</Text>
                         </View>
 
                         <View style={{width: '30%'}}>

@@ -46,7 +46,7 @@ export default class Topforecast extends Component {
 
         return (
              <ScrollView>
-                <Header/>
+                <Header navigation={this.props.navigation}/>
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({item: rowData, index}) => this.displayRow(rowData, index)}
@@ -71,7 +71,7 @@ export default class Topforecast extends Component {
                                 <Image style={{height: 30, width: 30}}
                                        source={imageIcon}/>
                             </View>
-                            <View style={{width: '20%'}}><Text>{(rowData.t2).toFixed(0) + '°'}</Text></View>
+                            <View style={{width: '20%'}}><Text style={[(rowData.t2).toFixed(0) > 0 ? Styles.textcssHot : Styles.textcssCold]}>{(rowData.t2).toFixed(0) + '°'}</Text></View>
                             <View style={{width: '20%'}}><Text>{(rowData.r).toFixed(0) + ' mm' } </Text></View>
                             <View style={{width: '10%'}}>
                                 <Text style={Styles.windIcon}>{IconService.getWindName(rowData.dtexti)}</Text>
@@ -89,7 +89,7 @@ export default class Topforecast extends Component {
                                     <Image style={{height: 30, width: 30}}
                                            source={IconService.getWeatherIcon(this.state.dataSource[index+1].merki)}/>
                                 </View>
-                                <View style={{width: '20%'}}><Text>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text></View>
+                                <View style={{width: '20%'}}><Text style={[(this.state.dataSource[index+1].t2).toFixed(0) > 0 ? Styles.textcssHot : Styles.textcssCold]}>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text></View>
                                 <View style={{width: '20%'}}><Text>{(this.state.dataSource[index+1].r).toFixed(0) + ' mm' } </Text></View>
                                 <View style={{width: '10%'}}><Text style={Styles.windIcon}>{IconService.getWindName(this.state.dataSource[index+1].dtexti)}</Text></View>
                                 <View style={{width: '10%'}}><Text>{(this.state.dataSource[index+1].f10).toFixed(0) }</Text></View>

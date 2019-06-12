@@ -3,11 +3,13 @@
  */
 import React, { Component } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
-import { Card } from 'react-native-elements/src/index.d';
+import { Styles } from './globalStyle';
 import Header from '../screens/Header';
 import faspaService from '../service/Faspa';
 import Frettir from '../screens/Frettir';
+import Advertisment from '../screens/Advertisment';
 import IconService from '../service/IconService';
+
 
 export default class Vinsaelir extends Component {
     constructor(props) {
@@ -77,7 +79,7 @@ export default class Vinsaelir extends Component {
                         </View>
 
                         <View style={{width: '20%'}}>
-                        <Text style={styles.textcss}>{(rowData.t2).toFixed(0) + '°'}</Text>
+                        <Text style={[(rowData.t2).toFixed(0) > 0 ? Styles.textcssHot : Styles.textcssCold]}>{(rowData.t2).toFixed(0) + '°'}</Text>
                         </View>
 
                         <View style={{width: '10%'}}>
@@ -85,7 +87,7 @@ export default class Vinsaelir extends Component {
                                     source={imageIconNext}/>
                         </View>
                         <View style={{width: '20%'}}>
-                        <Text style={styles.textcss}>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text>
+                        <Text style={[(this.state.dataSource[index+1].t2).toFixed(0) > 0 ? Styles.textcssHot : Styles.textcssCold]}>{(this.state.dataSource[index+1].t2).toFixed(0) + '°'}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -114,9 +116,6 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10
     },
-    textcss: {
-        paddingLeft: 10,
-        paddingRight: 10
-    },
+
 
 });
